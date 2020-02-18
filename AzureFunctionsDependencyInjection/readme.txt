@@ -1,0 +1,1 @@
+This is a POC/proposal concerning DI support in Azure functions.

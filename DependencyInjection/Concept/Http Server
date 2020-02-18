@@ -1,0 +1,45 @@
+void Main()
+{
+	RouteTable routeTable = ComputeRouteTable();
+	
+	SocketListener listener = new SocketListener(80);
+	
+	while (true)
+	{
+		Socket socket = listener.Accept();
+		
+		Task.Run(() => {
+			
+			HttpRequest request = HttpRequest.Deserialize(socket.Stream);
+			
+			Type type = routeTable.ResolveControllerType(request.Url);
+			
+			Controller controller = CreateController(type);
+			
+			string actionMethod = routeTable.ResolveAction(request.Url, request.Method);
+		
+			ActionResult result = (ActionResult)type.GetMethod(actionMethod).Invoke(controller, request);
+	
+			socket.Write(HttpResponse.Serialize(result));
+		};
+	}
+}
+
+RouteTable ComputeRouteTable()
+{
+	// various techniques are available.  
+	// ASP.NET MVC provides default routes in the format {controller}/{action}, but additional ones may be added.
+	// Further, ASP.NET MVC uses reflection (with "convention over configuration" to look for Controller instances.
+	// (Classes that end with "Controller" and implement Controller)
+	
+	return new RouteTable
+	{
+		["/"] = HomeController,
+		["Events"] => EventController,
+	};
+}
+
+Controller CreateController(Type type)
+{
+	return (Controller)Activator.CreateInstance(type);
+}
