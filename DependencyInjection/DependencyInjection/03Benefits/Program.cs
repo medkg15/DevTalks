@@ -1,4 +1,4 @@
-﻿namespace DependencyInjection._3Benefits
+﻿namespace DependencyInjection._03Benefits
 {
     class Program
     {

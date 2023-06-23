@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DependencyInjection._3Benefits
+namespace DependencyInjection._03Benefits
 {
     public class BetterObjectB : InterfaceB
     {

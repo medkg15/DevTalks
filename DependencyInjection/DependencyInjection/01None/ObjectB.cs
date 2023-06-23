@@ -1,4 +1,6 @@
-﻿namespace DependencyInjection._1None
+﻿using System.Data.SqlClient;
+
+namespace DependencyInjection._1None
 {
     public class ObjectB : InterfaceB
     {

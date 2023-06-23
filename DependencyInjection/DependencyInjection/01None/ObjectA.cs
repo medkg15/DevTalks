@@ -13,5 +13,8 @@
             
             // do some more stuff
         }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

@@ -1,12 +1,16 @@
-﻿namespace DependencyInjection._1None
+﻿using System;
+
+namespace DependencyInjection._1None
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var a = new ObjectA();
+            //ObjectA a = new ObjectA();
 
-            a.DoStuff();
+            Type type = Type.GetType(Console.ReadLine());
+
+            object a = Activator.CreateInstance(type);
         }
     }
 }
